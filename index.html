@@ -192,6 +192,16 @@
       if (allFieldsFilled) {
         // Gather form data
         const formData = new FormData(document.getElementById('reservation-form'));
+        // Create a new object to hold the form data
+        const formDataObject = {};
+
+        // Iterate over the formData entries and add them to the object
+        for (const [key, value] of formData.entries()) {
+          formDataObject[key] = value;
+        }
+
+        // Convert the object to a JSON string
+        const formDataJson = JSON.stringify(formDataObject);
 
         // Send POST request to localhost:3000
         fetch('https://ye2tzeu2aa.execute-api.ap-southeast-1.amazonaws.com/default/RestaurantReservation-NewReservation', {
