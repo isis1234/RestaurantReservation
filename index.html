@@ -125,15 +125,14 @@
     </select>
     <br/>
     <div id="telegram-input" class="hidden">
-      <label for="telegram">Telegram:</label>
-      <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="yuyu_test_bot" data-size="large" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
       <input type="hidden" id="telegram" name="telegram">
-      <br/>
+      <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="yuyu_test_bot" data-size="large" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
       <script type="text/javascript">
         function onTelegramAuth(user) {
           console.log(user)
           alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
           document.getElementById('telegram').value = JSON.stringify(user);
+          document.getElementById('confirm').classList.remove('hidden');
         }
       </script>
     </div>
@@ -163,12 +162,15 @@
       if (this.value === 'telegram') {
         telegramInput.classList.remove('hidden');
         whatsappInput.classList.add('hidden');
+        document.getElementById('confirm').classList.add('hidden');
       } else if (this.value === 'whatsapp') {
         whatsappInput.classList.remove('hidden');
         telegramInput.classList.add('hidden');
+        document.getElementById('confirm').classList.add('hidden');
       } else {
         telegramInput.classList.add('hidden');
         whatsappInput.classList.add('hidden');
+        document.getElementById('confirm').classList.add('hidden');
       }
     });
 
