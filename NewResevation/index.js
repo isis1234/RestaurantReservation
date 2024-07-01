@@ -43,10 +43,10 @@ const main = async function(event, context){
       text += `- 人數: ${requestBody.reg_people}\n`;
       text += `- 時間: ${requestBody.reg_date} ${requestBody.reg_time}\n`;
       text += `有位再叫\n`;
-      await axios.post(`https://api.telegram.org/bot${BOT_ID}:${BOT_PWD}/sendMessage`, {
-        chat_id: 977592,
+      axios.post(`https://api.telegram.org/bot${process.env.BOT_ID}:${process.env.BOT_PWD}/sendMessage`, {
+        text,
+        chat_id: telegramId,
         parse_mode: "html",
-        "text": text
       });
     }
 
