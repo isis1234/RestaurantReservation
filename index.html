@@ -206,10 +206,7 @@
         // Send POST request to localhost:3000
         fetch('https://ye2tzeu2aa.execute-api.ap-southeast-1.amazonaws.com/default/RestaurantReservation-NewReservation', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: formDataObject
+          body: formDataJson
         })
         .then(response => {
           if (response.ok) {
