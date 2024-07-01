@@ -13,17 +13,17 @@ const getDBConnection = async (event, context) => {
 }
 
 const main = async function(event, context){
-  event = {
-    body: JSON.stringify({
-      restaurant_name: "挽肉と米",
-      reg_people: 4,
-      reg_date: "2024-07-11",
-      reg_time: "7pm",
-      contact_method: "telegram",
-      telegram: "uuuuuzx",
-      whatsapp: null,
-    })
-  };
+  // event = {
+  //   body: JSON.stringify({
+  //     restaurant_name: "挽肉と米",
+  //     reg_people: 4,
+  //     reg_date: "2024-07-11",
+  //     reg_time: "7pm",
+  //     contact_method: "telegram",
+  //     telegram: "uuuuuzx",
+  //     whatsapp: null,
+  //   })
+  // };
   const mongo = await getDBConnection();
 
   try {
