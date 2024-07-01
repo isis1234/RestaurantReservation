@@ -1,5 +1,6 @@
 require("dotenv").config()
 const { MongoClient } = require('mongodb');
+const axios = require('axios');
 
 const getDBConnection = async (event, context) => {
     try {
@@ -29,14 +30,25 @@ const main = async function(event, context){
   try {
     // Parse the request body
     const requestBody = JSON.parse(event.body);
-    const {
-      restaurant_name, reg_people, reg_date, reg_time, contact_method, telegram, whatsapp,
-      created_date = new Date()
-    } = requestBody;
+    const created_date = new Date();
 
     // Insert record
     await mongo.connect();
     await mongo.db(process.env.MONGO_DB).collection(process.env.MONGO_COLLECTION).insertOne({ ...requestBody, created_date });
+
+    if (requestBody.telegram) {
+      const { id: telegramId } = JSON.parse(requestBody.telegram);
+      let text = ``;
+      text += `<b>Booking ${requestBody.restaurant_name}</b>\n`;
+      text += `- 人數: ${requestBody.reg_people}\n`;
+      text += `- 時間: ${requestBody.reg_date} ${requestBody.reg_time}\n`;
+      text += `有位再叫\n`;
+      await axios.post(`https://api.telegram.org/bot${BOT_ID}:${BOT_PWD}/sendMessage`, {
+        chat_id: 977592,
+        parse_mode: "html",
+        "text": text
+      });
+    }
 
     // Response
     const response = {
