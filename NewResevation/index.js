@@ -28,10 +28,11 @@ const main = async function(event, context){
   try {
     // Parse the request body
     const requestBody = JSON.parse(event.body);
-    const {
-      restaurant_name, reg_people, reg_date, reg_time, contact_method, telegram, whatsapp,
-      created_date = new Date()
-    } = requestBody;
+    const createdDate = new Date();
+    // const {
+    //   restaurant_name, reg_people, reg_date, reg_time, contact_method, telegram, whatsapp,
+    //   created_date = new Date()
+    // } = requestBody;
 
     // Insert record
     await mongo.connect();
